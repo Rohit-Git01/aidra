@@ -1,0 +1,40 @@
+{
+  "business_terms": [
+    {
+      "term": "Premium",
+      "mapped_column": "premium_amount",
+      "table": "policies",
+      "description": "Recurring amount paid by customer for insurance coverage."
+    },
+    {
+      "term": "Coverage Amount",
+      "mapped_column": "coverage_amount",
+      "table": "policies",
+      "description": "Maximum insured amount covered under policy."
+    },
+    {
+      "term": "Claim",
+      "mapped_column": "claim_amount",
+      "table": "claims",
+      "description": "Insurance amount requested by customer due to insured event."
+    },
+    {
+      "term": "Settlement Amount",
+      "mapped_column": "settlement_amount",
+      "table": "claims",
+      "description": "Approved amount paid by insurance company."
+    },
+    {
+      "term": "Active Policy",
+      "mapped_column": "policy_status",
+      "table": "policies",
+      "description": "Policy currently active and valid."
+    },
+    {
+      "term": "Fraudulent Claim",
+      "mapped_column": "fraud_flag",
+      "table": "claims",
+      "description": "Claim suspected for fraud investigation."
+    }
+  ]
+}

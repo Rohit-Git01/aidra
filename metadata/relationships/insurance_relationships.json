@@ -1,0 +1,44 @@
+{
+  "relationships": [
+    {
+      "from_table": "policies",
+      "from_column": "customer_id",
+      "to_table": "customers",
+      "to_column": "customer_id",
+      "relationship_type": "many-to-one",
+      "business_meaning": "Multiple policies can belong to one customer."
+    },
+    {
+      "from_table": "policies",
+      "from_column": "agent_id",
+      "to_table": "agents",
+      "to_column": "agent_id",
+      "relationship_type": "many-to-one",
+      "business_meaning": "Multiple policies can be managed by one agent."
+    },
+    {
+      "from_table": "claims",
+      "from_column": "policy_id",
+      "to_table": "policies",
+      "to_column": "policy_id",
+      "relationship_type": "many-to-one",
+      "business_meaning": "Multiple claims can be raised against one policy."
+    },
+    {
+      "from_table": "payments",
+      "from_column": "policy_id",
+      "to_table": "policies",
+      "to_column": "policy_id",
+      "relationship_type": "many-to-one",
+      "business_meaning": "Multiple premium payments can exist for one policy."
+    },
+    {
+      "from_table": "agents",
+      "from_column": "branch_id",
+      "to_table": "branches",
+      "to_column": "branch_id",
+      "relationship_type": "many-to-one",
+      "business_meaning": "Multiple agents can belong to one branch."
+    }
+  ]
+}
