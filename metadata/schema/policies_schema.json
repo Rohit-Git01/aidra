@@ -1,0 +1,92 @@
+{
+  "table_name": "policies",
+  "business_name": "Insurance Policies",
+  "purpose": "Stores insurance policy details issued to customers.",
+  "primary_key": "policy_id",
+  "business_description": "Represents insurance policies purchased by customers.",
+  "columns": [
+    {
+      "column_name": "policy_id",
+      "data_type": "INTEGER",
+      "business_alias": "Policy ID",
+      "description": "Unique identifier for each insurance policy.",
+      "nullable": false
+    },
+    {
+      "column_name": "customer_id",
+      "data_type": "INTEGER",
+      "business_alias": "Customer ID",
+      "description": "Reference to the customer owning the policy.",
+      "nullable": false
+    },
+    {
+      "column_name": "policy_type",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "Policy Type",
+      "description": "Type of insurance policy.",
+      "allowed_values": [
+        "Health",
+        "Life",
+        "Vehicle",
+        "Home",
+        "Travel"
+      ],
+      "nullable": false
+    },
+    {
+      "column_name": "premium_amount",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Premium Amount",
+      "description": "Recurring premium amount paid for the policy.",
+      "nullable": false
+    },
+    {
+      "column_name": "coverage_amount",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Coverage Amount",
+      "description": "Maximum insured coverage amount.",
+      "nullable": false
+    },
+    {
+      "column_name": "policy_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Policy Status",
+      "description": "Current status of the policy.",
+      "allowed_values": [
+        "Active",
+        "Expired",
+        "Cancelled",
+        "Pending"
+      ],
+      "nullable": false
+    },
+    {
+      "column_name": "start_date",
+      "data_type": "DATE",
+      "business_alias": "Policy Start Date",
+      "description": "Policy effective start date.",
+      "nullable": false
+    },
+    {
+      "column_name": "end_date",
+      "data_type": "DATE",
+      "business_alias": "Policy End Date",
+      "description": "Policy expiration date.",
+      "nullable": false
+    },
+    {
+      "column_name": "agent_id",
+      "data_type": "INTEGER",
+      "business_alias": "Agent ID",
+      "description": "Reference to the insurance agent managing the policy.",
+      "nullable": true
+    },
+    {
+      "column_name": "created_date",
+      "data_type": "TIMESTAMP",
+      "business_alias": "Policy Created Date",
+      "description": "Timestamp when the policy was created.",
+      "nullable": false
+    }
+  ]
+}

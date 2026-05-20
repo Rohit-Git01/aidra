@@ -1,0 +1,63 @@
+{
+  "table_name": "agents",
+  "business_name": "Insurance Agents",
+  "purpose": "Stores insurance agent information.",
+  "primary_key": "agent_id",
+  "business_description": "Represents insurance agents responsible for policy sales and customer handling.",
+  "columns": [
+    {
+      "column_name": "agent_id",
+      "data_type": "INTEGER",
+      "business_alias": "Agent ID",
+      "description": "Unique identifier for each insurance agent.",
+      "nullable": false
+    },
+    {
+      "column_name": "agent_name",
+      "data_type": "VARCHAR(100)",
+      "business_alias": "Agent Name",
+      "description": "Full name of insurance agent.",
+      "nullable": false
+    },
+    {
+      "column_name": "branch_id",
+      "data_type": "INTEGER",
+      "business_alias": "Branch ID",
+      "description": "Reference to associated branch.",
+      "nullable": false
+    },
+    {
+      "column_name": "region",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "Region",
+      "description": "Operational region of agent.",
+      "nullable": true
+    },
+    {
+      "column_name": "commission_rate",
+      "data_type": "DECIMAL(5,2)",
+      "business_alias": "Commission Rate",
+      "description": "Agent commission percentage.",
+      "nullable": true
+    },
+    {
+      "column_name": "joining_date",
+      "data_type": "DATE",
+      "business_alias": "Joining Date",
+      "description": "Date when agent joined organization.",
+      "nullable": false
+    },
+    {
+      "column_name": "agent_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Agent Status",
+      "description": "Current status of insurance agent.",
+      "allowed_values": [
+        "Active",
+        "Inactive",
+        "Suspended"
+      ],
+      "nullable": false
+    }
+  ]
+}

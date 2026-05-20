@@ -1,0 +1,152 @@
+{
+  "table_name": "customers",
+  "business_name": "Insurance Customers",
+  "purpose": "Stores customer demographic and contact information for insurance policy management and analytics.",
+  "primary_key": "customer_id",
+  "business_description": "Represents individual customers who purchase insurance policies from the company.",
+  "columns": [
+    {
+      "column_name": "customer_id",
+      "data_type": "INTEGER",
+      "business_alias": "Customer ID",
+      "description": "Unique identifier for each insurance customer.",
+      "nullable": false,
+      "analytics_usage": [
+        "Customer-level reporting",
+        "Policy linkage",
+        "Claims linkage"
+      ]
+    },
+    {
+      "column_name": "full_name",
+      "data_type": "VARCHAR(100)",
+      "business_alias": "Customer Name",
+      "description": "Full legal name of the customer.",
+      "nullable": false,
+      "analytics_usage": [
+        "Customer lookup",
+        "Customer reporting"
+      ]
+    },
+    {
+      "column_name": "gender",
+      "data_type": "VARCHAR(10)",
+      "business_alias": "Gender",
+      "description": "Gender of the customer.",
+      "nullable": true,
+      "allowed_values": [
+        "Male",
+        "Female",
+        "Other"
+      ],
+      "analytics_usage": [
+        "Demographic analysis",
+        "Claim trend analysis"
+      ]
+    },
+    {
+      "column_name": "age",
+      "data_type": "INTEGER",
+      "business_alias": "Customer Age",
+      "description": "Age of the customer.",
+      "nullable": true,
+      "analytics_usage": [
+        "Risk segmentation",
+        "Age-based analytics"
+      ]
+    },
+    {
+      "column_name": "city",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "City",
+      "description": "City where the customer resides.",
+      "nullable": true,
+      "analytics_usage": [
+        "Regional analytics",
+        "City-wise premium trends",
+        "Claims distribution"
+      ]
+    },
+    {
+      "column_name": "state",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "State",
+      "description": "State where the customer resides.",
+      "nullable": true,
+      "analytics_usage": [
+        "Regional reporting",
+        "Geographical segmentation"
+      ]
+    },
+    {
+      "column_name": "phone_number",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Phone Number",
+      "description": "Primary contact number of the customer.",
+      "nullable": true,
+      "analytics_usage": [
+        "Customer communication"
+      ]
+    },
+    {
+      "column_name": "email",
+      "data_type": "VARCHAR(100)",
+      "business_alias": "Email Address",
+      "description": "Email address of the customer.",
+      "nullable": true,
+      "analytics_usage": [
+        "Customer communication",
+        "Digital engagement analytics"
+      ]
+    },
+    {
+      "column_name": "occupation",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "Occupation",
+      "description": "Occupation category of the customer.",
+      "nullable": true,
+      "analytics_usage": [
+        "Risk profiling",
+        "Customer segmentation"
+      ]
+    },
+    {
+      "column_name": "annual_income",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Annual Income",
+      "description": "Estimated annual income of the customer.",
+      "nullable": true,
+      "analytics_usage": [
+        "Risk analysis",
+        "Premium affordability analysis"
+      ]
+    },
+    {
+      "column_name": "customer_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Customer Status",
+      "description": "Current customer lifecycle status.",
+      "nullable": false,
+      "allowed_values": [
+        "Active",
+        "Inactive",
+        "Blacklisted"
+      ],
+      "analytics_usage": [
+        "Customer retention analysis",
+        "Active customer reporting"
+      ]
+    },
+    {
+      "column_name": "created_date",
+      "data_type": "TIMESTAMP",
+      "business_alias": "Customer Created Date",
+      "description": "Date and time when customer record was created.",
+      "nullable": false,
+      "analytics_usage": [
+        "Customer onboarding trends",
+        "Growth analytics"
+      ]
+    }
+  ]
+}

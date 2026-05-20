@@ -1,0 +1,62 @@
+{
+  "table_name": "branches",
+  "business_name": "Insurance Branches",
+  "purpose": "Stores insurance branch office information.",
+  "primary_key": "branch_id",
+  "business_description": "Represents insurance company branch offices across different regions.",
+  "columns": [
+    {
+      "column_name": "branch_id",
+      "data_type": "INTEGER",
+      "business_alias": "Branch ID",
+      "description": "Unique identifier for insurance branch.",
+      "nullable": false
+    },
+    {
+      "column_name": "branch_name",
+      "data_type": "VARCHAR(100)",
+      "business_alias": "Branch Name",
+      "description": "Official branch office name.",
+      "nullable": false
+    },
+    {
+      "column_name": "city",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "City",
+      "description": "City where branch is located.",
+      "nullable": false
+    },
+    {
+      "column_name": "state",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "State",
+      "description": "State where branch is located.",
+      "nullable": false
+    },
+    {
+      "column_name": "region",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "Region",
+      "description": "Operational region of branch.",
+      "nullable": false
+    },
+    {
+      "column_name": "manager_name",
+      "data_type": "VARCHAR(100)",
+      "business_alias": "Branch Manager",
+      "description": "Manager responsible for branch operations.",
+      "nullable": true
+    },
+    {
+      "column_name": "branch_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Branch Status",
+      "description": "Current operational status of branch.",
+      "allowed_values": [
+        "Active",
+        "Inactive"
+      ],
+      "nullable": false
+    }
+  ]
+}

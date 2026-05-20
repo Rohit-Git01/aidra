@@ -1,0 +1,78 @@
+{
+  "table_name": "claims",
+  "business_name": "Insurance Claims",
+  "purpose": "Stores insurance claim information raised against policies.",
+  "primary_key": "claim_id",
+  "business_description": "Represents customer insurance claims and settlement details.",
+  "columns": [
+    {
+      "column_name": "claim_id",
+      "data_type": "INTEGER",
+      "business_alias": "Claim ID",
+      "description": "Unique identifier for each claim.",
+      "nullable": false
+    },
+    {
+      "column_name": "policy_id",
+      "data_type": "INTEGER",
+      "business_alias": "Policy ID",
+      "description": "Reference to associated insurance policy.",
+      "nullable": false
+    },
+    {
+      "column_name": "claim_amount",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Claim Amount",
+      "description": "Amount requested in claim.",
+      "nullable": false
+    },
+    {
+      "column_name": "settlement_amount",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Settlement Amount",
+      "description": "Approved settlement amount.",
+      "nullable": true
+    },
+    {
+      "column_name": "claim_reason",
+      "data_type": "VARCHAR(255)",
+      "business_alias": "Claim Reason",
+      "description": "Reason for insurance claim.",
+      "nullable": true
+    },
+    {
+      "column_name": "claim_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Claim Status",
+      "description": "Current claim processing status.",
+      "allowed_values": [
+        "Approved",
+        "Rejected",
+        "Pending",
+        "Under Review"
+      ],
+      "nullable": false
+    },
+    {
+      "column_name": "claim_date",
+      "data_type": "DATE",
+      "business_alias": "Claim Date",
+      "description": "Date when claim was raised.",
+      "nullable": false
+    },
+    {
+      "column_name": "settlement_date",
+      "data_type": "DATE",
+      "business_alias": "Settlement Date",
+      "description": "Date when claim was settled.",
+      "nullable": true
+    },
+    {
+      "column_name": "fraud_flag",
+      "data_type": "BOOLEAN",
+      "business_alias": "Fraud Flag",
+      "description": "Indicates whether claim is flagged for fraud review.",
+      "nullable": false
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "table_name": "payments",
+  "business_name": "Premium Payments",
+  "purpose": "Stores insurance premium payment transactions.",
+  "primary_key": "payment_id",
+  "business_description": "Represents premium payments made by customers for policies.",
+  "columns": [
+    {
+      "column_name": "payment_id",
+      "data_type": "INTEGER",
+      "business_alias": "Payment ID",
+      "description": "Unique payment transaction identifier.",
+      "nullable": false
+    },
+    {
+      "column_name": "policy_id",
+      "data_type": "INTEGER",
+      "business_alias": "Policy ID",
+      "description": "Reference to associated insurance policy.",
+      "nullable": false
+    },
+    {
+      "column_name": "payment_amount",
+      "data_type": "DECIMAL(12,2)",
+      "business_alias": "Payment Amount",
+      "description": "Amount paid towards premium.",
+      "nullable": false
+    },
+    {
+      "column_name": "payment_date",
+      "data_type": "DATE",
+      "business_alias": "Payment Date",
+      "description": "Date when payment was made.",
+      "nullable": false
+    },
+    {
+      "column_name": "payment_method",
+      "data_type": "VARCHAR(50)",
+      "business_alias": "Payment Method",
+      "description": "Mode of payment used.",
+      "allowed_values": [
+        "UPI",
+        "Credit Card",
+        "Debit Card",
+        "Net Banking",
+        "Cash"
+      ],
+      "nullable": false
+    },
+    {
+      "column_name": "payment_status",
+      "data_type": "VARCHAR(20)",
+      "business_alias": "Payment Status",
+      "description": "Status of payment transaction.",
+      "allowed_values": [
+        "Success",
+        "Failed",
+        "Pending"
+      ],
+      "nullable": false
+    }
+  ]
+}
