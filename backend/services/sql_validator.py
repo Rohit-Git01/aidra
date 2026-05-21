@@ -2,9 +2,20 @@ import re
 import sys
 from pathlib import Path
 
+
+# ----------------------------------------
+# PROJECT ROOT PATH FIX
+# ----------------------------------------
+
 ROOT_DIR = Path(__file__).resolve().parents[2]
+
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+
+
+# ----------------------------------------
+# IMPORT METADATA LOADERS
+# ----------------------------------------
 
 from backend.utils.metadata_loader import (
     load_schema_metadata,
@@ -67,7 +78,9 @@ def get_valid_relationships():
             f"{relationship['to_column']}"
         )
 
-        valid_relationships.add((from_side, to_side))
+        valid_relationships.add(
+            (from_side, to_side)
+        )
 
     return valid_relationships
 
@@ -104,7 +117,10 @@ def validate_select_only(sql_query):
 
 def extract_tables(sql_query):
 
-    table_pattern = r"(FROM|JOIN)\s+([a-zA-Z_][a-zA-Z0-9_]*)"
+    table_pattern = (
+        r"(FROM|JOIN)\s+"
+        r"([a-zA-Z_][a-zA-Z0-9_]*)"
+    )
 
     matches = re.findall(
         table_pattern,
@@ -121,6 +137,41 @@ def extract_tables(sql_query):
 
 
 # ----------------------------------------
+# EXTRACT JOIN CONDITIONS
+# ----------------------------------------
+
+def extract_join_conditions(sql_query):
+
+    join_pattern = (
+        r"ON\s+"
+        r"([a-zA-Z_][a-zA-Z0-9_]*"
+        r"\.[a-zA-Z_][a-zA-Z0-9_]*)"
+        r"\s*=\s*"
+        r"([a-zA-Z_][a-zA-Z0-9_]*"
+        r"\.[a-zA-Z_][a-zA-Z0-9_]*)"
+    )
+
+    matches = re.findall(
+        join_pattern,
+        sql_query,
+        re.IGNORECASE
+    )
+
+    extracted_joins = []
+
+    for left_side, right_side in matches:
+
+        extracted_joins.append(
+            (
+                left_side.strip(),
+                right_side.strip()
+            )
+        )
+
+    return extracted_joins
+
+
+# ----------------------------------------
 # VALIDATE TABLES
 # ----------------------------------------
 
@@ -130,38 +181,115 @@ def validate_tables(sql_query):
 
     valid_tables = get_valid_tables()
 
-    invalid_tables = extracted_tables - valid_tables
+    invalid_tables = (
+        extracted_tables - valid_tables
+    )
 
-    return len(invalid_tables) == 0, invalid_tables
+    return (
+        len(invalid_tables) == 0,
+        invalid_tables
+    )
 
 
 # ----------------------------------------
-# VALIDATE SQL
+# VALIDATE RELATIONSHIPS
+# ----------------------------------------
+
+def validate_relationships(sql_query):
+
+    extracted_joins = (
+        extract_join_conditions(sql_query)
+    )
+
+    valid_relationships = (
+        get_valid_relationships()
+    )
+
+    invalid_joins = []
+
+    for left_side, right_side in extracted_joins:
+
+        relationship_pair = (
+            left_side,
+            right_side
+        )
+
+        reverse_pair = (
+            right_side,
+            left_side
+        )
+
+        if (
+            relationship_pair not in valid_relationships
+            and reverse_pair not in valid_relationships
+        ):
+
+            invalid_joins.append(
+                relationship_pair
+            )
+
+    return (
+        len(invalid_joins) == 0,
+        invalid_joins
+    )
+
+
+# ----------------------------------------
+# MAIN SQL VALIDATION
 # ----------------------------------------
 
 def validate_sql(sql_query):
 
     validation_results = {}
 
-    # SELECT ONLY CHECK
+    # ----------------------------------------
+    # SELECT ONLY VALIDATION
+    # ----------------------------------------
 
     validation_results["select_only"] = (
         validate_select_only(sql_query)
     )
 
+    # ----------------------------------------
     # TABLE VALIDATION
+    # ----------------------------------------
 
-    table_validation, invalid_tables = validate_tables(sql_query)
+    table_validation, invalid_tables = (
+        validate_tables(sql_query)
+    )
 
-    validation_results["valid_tables"] = table_validation
+    validation_results["valid_tables"] = (
+        table_validation
+    )
 
-    validation_results["invalid_tables"] = list(invalid_tables)
+    validation_results["invalid_tables"] = (
+        list(invalid_tables)
+    )
 
-    # FINAL STATUS
+    # ----------------------------------------
+    # RELATIONSHIP VALIDATION
+    # ----------------------------------------
+
+    relationship_validation, invalid_joins = (
+        validate_relationships(sql_query)
+    )
+
+    validation_results["valid_relationships"] = (
+        relationship_validation
+    )
+
+    validation_results["invalid_joins"] = (
+        invalid_joins
+    )
+
+    # ----------------------------------------
+    # FINAL VALIDATION STATUS
+    # ----------------------------------------
 
     validation_results["is_valid"] = all([
         validation_results["select_only"],
-        validation_results["valid_tables"]
+        validation_results["valid_tables"],
+        validation_results["valid_relationships"]
     ])
 
     return validation_results

@@ -14,6 +14,9 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 
+from backend.services.sql_validator import (validate_sql)
+
+
 # ----------------------------------------
 # IMPORT METADATA LOADERS
 # ----------------------------------------
@@ -249,7 +252,31 @@ def generate_sql(user_question):
 
     sql_query = extract_sql(raw_response)
 
-    return sql_query
+    if sql_query is None:
+        return {
+            "success": False,
+            "sql_query": None,
+            "validation": {
+                "is_valid": False,
+                "error": "No SQL query could be extracted from the model response.",
+                "response": raw_response
+            }
+        }
+
+    validation_result = validate_sql(sql_query)
+
+    if validation_result["is_valid"]:
+        return{
+            "success": True,
+            "sql_query": sql_query,
+            "validation": validation_result
+        }
+    else:
+        return {
+            "success": False,
+            "sql_query": sql_query,
+            "validation": validation_result
+        }
 
 
 # ----------------------------------------
@@ -260,8 +287,8 @@ if __name__ == "__main__":
 
     question = "Show top 5 cities with highest claim amounts"
 
-    generated_sql = generate_sql(question)
+    result = generate_sql(question)
 
-    print("\nGenerated SQL Query:\n")
+    print("\nAIDRA RESULT:\n")
 
-    print(generated_sql)
+    print(result)
